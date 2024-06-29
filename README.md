@@ -12,14 +12,12 @@ https://github.com/yblockcha1n/Go-Ethereum/assets/144770048/aa763a8a-10c6-4c9f-8
 **1. Clone the repository**
 ```
 git clone https://github.com/yblockcha1n/Go-Ethereum.git
-
 cd Go-Ethereum
 ```
 
 **2. Install dependencies**
 ```
 go mod init Go-Ethereum
-
 go get github.com/ethereum/go-ethereum
 ```
 
