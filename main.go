@@ -104,7 +104,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to estimate gas limit: %v", err)
 	}
-	gasLimit += 30000
+	gasLimit += 30000　// テストとして余裕を持たせる
 
 	tx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, txData)
 
