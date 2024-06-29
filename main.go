@@ -1,13 +1,17 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"crypto/ecdsa"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"math/big"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/ethereum/go-ethereum"
@@ -76,9 +80,33 @@ func main() {
 
 	to := common.HexToAddress(config.ToAddress)
 	value := big.NewInt(1000000000) // 1 gwei
-	gasLimit := uint64(21000)
 
-	tx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, nil)
+	fmt.Print("Enter your message: ")
+	reader := bufio.NewReader(os.Stdin)
+	message, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Failed to read message: %v", err)
+	}
+	message = strings.TrimSpace(message)
+
+	// メッセージをHEXに変換
+	data := []byte(message)
+	hexData := hex.EncodeToString(data)
+	fmt.Printf("Message in HEX: 0x%s\n", hexData)
+
+	// HEXデータをスライスに変換
+	txData := common.FromHex(hexData)
+
+	gasLimit, err := client.EstimateGas(ctx, ethereum.CallMsg{
+		To:   &to,
+		Data: txData,
+	})
+	if err != nil {
+		log.Fatalf("Failed to estimate gas limit: %v", err)
+	}
+	gasLimit += 30000
+
+	tx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, txData)
 
 	chainID, err := client.NetworkID(ctx)
 	if err != nil {
@@ -103,6 +131,7 @@ func main() {
 	}
 
 	fmt.Printf("Transaction confirmed in block %d\n", receipt.BlockNumber)
+	fmt.Printf("Gas used: %d\n", receipt.GasUsed)
 }
 
 func waitForTransaction(ctx context.Context, client *ethclient.Client, txHash common.Hash) (*types.Receipt, error) {
@@ -118,6 +147,7 @@ func waitForTransaction(ctx context.Context, client *ethclient.Client, txHash co
 		case <-ctx.Done():
 			return nil, ctx.Err()
 		case <-time.After(time.Second):
+			fmt.Println("Waiting for transaction confirmation...")
 		}
 	}
 }
