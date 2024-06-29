@@ -10,17 +10,18 @@ https://github.com/yblockcha1n/Go-Ethereum/assets/144770048/aa763a8a-10c6-4c9f-8
 ## Setup
 
 **1. Clone the repository**
+```
+git clone https://github.com/yblockcha1n/Go-Ethereum.git
 
-`git clone https://github.com/yblockcha1n/Go-Ethereum.git`
-
-`cd Go-Ethereum`
+cd Go-Ethereum
+```
 
 **2. Install dependencies**
+```
+go mod init Go-Ethereum
 
-`go mod init Go-Ethereum`
-
-`go get github.com/ethereum/go-ethereum`
-
+go get github.com/ethereum/go-ethereum
+```
 
 **3. Create a `config.json` file in the project root with the following structure**
 
