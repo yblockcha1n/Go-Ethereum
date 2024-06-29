@@ -1,0 +1,5 @@
+{
+    "infura_url": "https://sepolia.infura.io/v3/{YOUR_INFURA_ID}",
+    "private_key": "YOUR_PRIVATE_KEY",
+    "to_address": "SEND_TO_ADDRESS"
+}
