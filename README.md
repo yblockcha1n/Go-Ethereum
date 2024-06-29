@@ -45,9 +45,11 @@ go build -o Go-Ethereum
 ./Go-Ethereum
 ```
 
-**3. When prompted, enter the message you want to include in the transaction.
-4. The application will convert your message to HEX, create a transaction including this data, and send it to the Sepolia Testnet.
-5. Wait for the transaction to be confirmed. The application will display the transaction hash and block number once confirmed.**
+**3. When prompted, enter the message you want to include in the transaction.**
+
+**4. The application will convert your message to HEX, create a transaction including this data, and send it to the Sepolia Testnet.**
+
+**5. Wait for the transaction to be confirmed. The application will display the transaction hash and block number once confirmed.**
 
 
 ## Important Notes
