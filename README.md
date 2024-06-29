@@ -36,13 +36,14 @@ Replace the placeholders with your actual Infura URL, private key, and recipient
 ## Running the Application
 
 **1. Build the application**
-
-`go build -o Go-Ethereum
-`
+```
+go build -o Go-Ethereum
+```
 
 **2. Run the application**
-
-`./Go-Ethereum`
+```
+./Go-Ethereum
+```
 
 **3. When prompted, enter the message you want to include in the transaction.
 4. The application will convert your message to HEX, create a transaction including this data, and send it to the Sepolia Testnet.
